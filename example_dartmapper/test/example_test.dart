@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:mock_web_server/mock_web_server.dart';
 import 'package:retrofit_example/json_mapper_example.dart';
-import 'package:retrofit_example/json_mapper_example.reflectable.dart'
+import 'package:retrofit_example/json_mapper_example.g.dart'
     show initializeReflectable;
 import 'package:test/test.dart';
 import '../lib/example.dart';

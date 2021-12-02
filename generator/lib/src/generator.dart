@@ -495,8 +495,21 @@ class RetrofitGenerator extends GeneratorForAnnotation<retrofit.RestApi> {
                   '(dynamic i) => ${_displayString(innerReturnType)}.fromMap(i as Map<String,dynamic>)');
               break;
             case retrofit.Parser.JsonSerializable:
-              mapperCode = refer(
-                  '(dynamic i) => ${_displayString(innerReturnType)}.fromJson(i as Map<String,dynamic>)');
+              if (_typeChecker(List).isExactlyType(innerReturnType!) ||
+                  _typeChecker(BuiltList).isExactlyType(innerReturnType)) {
+                final innerReturnType2 = _getResponseInnerType(innerReturnType);
+                mapperCode = refer(
+                    '(dynamic i) => (i as List<dynamic>).map((dynamic j) => ${_displayString(innerReturnType2)}.fromJson(j as Map<String, dynamic>)).toList()');
+              }
+              /*else if (_typeChecker(Map).isExactlyType(innerReturnType) ||
+                  _typeChecker(BuiltMap).isExactlyType(innerReturnType)) {
+                final innerTypes = _getResponseInnerTypes(innerReturnType);
+
+              }*/
+              else {
+                mapperCode = refer(
+                    '(dynamic i) => ${_displayString(innerReturnType)}.fromJson(i as Map<String,dynamic>)');
+              }
               break;
             case retrofit.Parser.DartJsonMapper:
               mapperCode = refer(
