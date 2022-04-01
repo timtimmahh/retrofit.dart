@@ -16,7 +16,7 @@ dependencies:
   tuple: ^2.0.0
   retrofit: #^2.2.0
     git:
-      url: git://github.com/timtimmahh/retrofit.dart.git
+      url: git@github.com:timtimmahh/retrofit.dart.git
       path: annotation
 #    path: ../annotation
   analyzer: ^2.0.0
